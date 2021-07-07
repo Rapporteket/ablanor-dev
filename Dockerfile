@@ -3,6 +3,7 @@ FROM rapporteket/rap-dev-data:nodata
 LABEL maintainer "Are Edvardsen <are.edvardsen@helse-nord.no>"
 
 # system libraries of general use
+# hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
     pandoc \
