@@ -6,5 +6,5 @@ Speed up development processes for ablanor...
 ```docker build -t rapporteket/ablanor-dev .```
 
 ### Run
-```TBD```
+```Maybe compose..?```
 
