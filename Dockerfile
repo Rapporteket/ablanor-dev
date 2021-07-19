@@ -23,6 +23,7 @@ RUN R -e "install.packages(c('remotes'), repos='https://cloud.r-project.org/')"
 RUN R -e "install.packages(c('binom',\
                              'covr',\
                              'dplyr',\
+                             'janitor',\
                              'kableExtra',\
                              'knitr',\
                              'lintr',\
