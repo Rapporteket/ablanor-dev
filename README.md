@@ -1,4 +1,4 @@
-## Tailored develoment docker image for ablanor
+## Tailored development docker image for ablanor
 
 Speed up development processes for ablanor...
 
