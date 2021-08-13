@@ -1,46 +1,31 @@
-FROM rapporteket/rap-dev-data:nodata
+FROM rapporteket/dev:0.1
 
 LABEL maintainer "Are Edvardsen <are.edvardsen@helse-nord.no>"
 
-# system libraries of general use
 # hadolint ignore=DL3008
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    sudo \
-    pandoc \
-    pandoc-citeproc \
-    libcurl4-gnutls-dev \
-    libcairo2-dev \
-    libxt-dev \
-    libxml2-dev \
-    libssl-dev \
-    libmariadbclient-dev \
-    libharfbuzz-dev \
-    libfribidi-dev \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# basic R functionality
-RUN R -e "install.packages(c('remotes'), repos='https://cloud.r-project.org/')"
-
-# install package dependencies
-RUN R -e "install.packages(c('binom',\
-                             'covr',\
-                             'dplyr',\
-                             'janitor',\
-                             'kableExtra',\
-                             'knitr',\
-                             'lintr',\
-                             'lubridate',\
-                             'magrittr',\
-                             'readr',\
-                             'rlang',\
-                             'rmarkdown',\
-                             'rpivotTable',\
-                             'shiny',\
-                             'shinyalert',\
-                             'shinycssloaders',\
-                             'stringr',\
-                             'testthat',\
-                             'tidyselect',\
-                             'xtable'))"
-
-RUN R -e "remotes::install_github(c('Rapporteket/rapbase@*release'))"
+# add registry dev config and R pkg dependencies
+COPY --chown=rstudio:rstudio db.yml /home/rstudio/rap_config/
+RUN cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml \
+    && rm /home/rstudio/rap_config/db.yml \
+    && R -e "install.packages(c('binom',\
+                                'covr',\
+                                'dplyr',\
+                                'janitor',\
+                                'kableExtra',\
+                                'knitr',\
+                                'lintr',\
+                                'lubridate',\
+                                'magrittr',\
+                                'readr',\
+                                'rlang',\
+                                'rmarkdown',\
+                                'rpivotTable',\
+                                'shiny',\
+                                'shinyalert',\
+                                'shinycssloaders',\
+                                'stringr',\
+                                'testthat',\
+                                'tidyselect',\
+                                'xtable'))" \
+    && R -e "remotes::install_github(c('Rapporteket/rapbase'))"
