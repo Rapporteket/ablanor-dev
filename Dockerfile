@@ -11,6 +11,7 @@ RUN cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml
     && R -e "install.packages(c('binom',\
                                 'covr',\
                                 'dplyr',\
+                                'DT', \
                                 'janitor',\
                                 'kableExtra',\
                                 'knitr',\
