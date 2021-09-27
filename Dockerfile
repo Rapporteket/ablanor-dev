@@ -29,4 +29,4 @@ RUN cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml
                                 'testthat',\
                                 'tidyselect',\
                                 'xtable'))" \
-    && R -e "remotes::install_github(c('Rapporteket/rapbase'))"
+    && R -e "remotes::install_github(c('Rapporteket/rapbase@HEAD'))"
