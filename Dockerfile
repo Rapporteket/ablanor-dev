@@ -5,9 +5,10 @@ LABEL maintainer "Are Edvardsen <are.edvardsen@helse-nord.no>"
 # hadolint ignore=DL3008
 
 # add registry dev config and R pkg dependencies
-COPY --chown=rstudio:rstudio db.yml /home/rstudio/rap_config/
-RUN cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml \
-    && rm /home/rstudio/rap_config/db.yml \
+COPY --chown=rstudio:rstudio db.yml ${R_RAP_CONFIG_PATH}/
+RUN cat ${R_RAP_CONFIG_PATH}/db.yml >> ${R_RAP_CONFIG_PATH}/dbConfig.yml \
+    && rm ${R_RAP_CONFIG_PATH}/db.yml \
+    && chmod ugo+rw ${R_RAP_CONFIG_PATH}/* \
     && R -e "install.packages(c('binom',\
                                 'covr',\
                                 'dplyr',\
